@@ -12,15 +12,16 @@ def binomDist():
     binomial = stats.binom.pmf(k, n, p)
 
     print("\n   Probabilidades       Acumuladas")
-    aux = 0
+    cumulative = 0
     j = inf
     for i in range(len(binomial)):
-        aux += binomial[i]
+        cumulative += binomial[i]
         print("P(%d) = %f" % (j, binomial[i]), end='    ')
-        print("F(%d) = %f" % (j, aux))
+        print("F(%d) = %f" % (j, cumulative))
         j += 1
     print("\n")
     return 0
+
 
 def menu():
     print("1.Binomial")
@@ -42,11 +43,11 @@ if __name__ == '__main__':
         # binomial = stats.binom.pmf(k, n, p)
         #
         # print("Probabilidades       Acumuladas")
-        # aux = 0
+        # cumulative = 0
         # for i in range(len(binomial)):
-        #     aux += binomial[i]
+        #     cumulative += binomial[i]
         #     print("P(%d) = %f" % (i, binomial[i]), end='    ')
-        #     print("F(%d) = %f" % (i, aux))
+        #     print("F(%d) = %f" % (i, cumulative))
         # binomDist()
 
 
