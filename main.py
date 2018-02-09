@@ -27,6 +27,17 @@ def binomial_dist():
         j += 1
     print("\nMedia: %f ; Varianza: %f ; Desviacion: %f \n" % (media, varianza, desviacion))
 
+    return 0
+
+
+def uniform_discrete_dist():
+    inf = int(input(("Introduce el rango inferior: ")))
+    sup = int(input(("Introduce el rango superior: "))) + 1
+    k = np.arange(inf, sup)
+    data = [][]
+
+    for i in range():
+        for j in range():
 
     return 0
 
