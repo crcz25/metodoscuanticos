@@ -98,6 +98,10 @@ def exp_dis():
     k = np.arange(inf, sup)
     exp = 1 - np.exp(-lambd * k)
 
+    media = 1 / lambd
+    varianza = 1 / (lambd * lambd)
+    desviacion = math.sqrt(1 / (lambd * lambd))
+
     print("\n   Probabilidades       Acumuladas")
     # cumulative = 0
     j = inf
@@ -107,6 +111,7 @@ def exp_dis():
         # print("P(%d) = %f" % (j, exp[i]), end='     ')
         # print("F(%d) = %f" % (j, cumulative))
         j += 1
+    print("\nMedia: %f ; Varianza: %f ; Desviacion: %f \n" % (media, varianza, desviacion))
 
     return 0
 
@@ -116,6 +121,9 @@ def menu():
     print("1.Binomial")
     print("2.Poisson")
     print("3.Proceso de poisson")
+    print("4.Proceso de poisson")
+
+    return 0
 
 
 if __name__ == '__main__':
@@ -131,22 +139,11 @@ if __name__ == '__main__':
             print("NOTA = Cuando x>=n es 1-f(a)")
         if option == 4:
             exp_dis()
+            print("NOTA = 1-e^-(lambd)(x)")
+        if option == 5:
+            uniform_discrete_dist()
         if option == 0:
             break
-
-        # print("\t\tBinomial")
-        # n = int(input("Introduce n: ")) + 1
-        # p = float(input("Introduce p: "))
-        # k = np.arange(n)
-        # binomial = stats.binom.pmf(k, n, p)
-        #
-        # print("Probabilidades       Acumuladas")
-        # cumulative = 0
-        # for i in range(len(binomial)):
-        #     cumulative += binomial[i]
-        #     print("P(%d) = %f" % (i, binomial[i]), end='    ')
-        #     print("F(%d) = %f" % (i, cumulative))
-        # binomDist()
 
 
 
