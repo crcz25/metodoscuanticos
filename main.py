@@ -4,7 +4,7 @@ import scipy.stats as stats
 import math
 
 
-def binomDist():
+def binomial_dist():
     print("\t\t\nBinomial")
     n = int(input("Introduce n: "))
     p = float(input("Introduce p: "))
@@ -40,7 +40,7 @@ if __name__ == '__main__':
         menu()
         option = int(input("Opcion: "))
         if option == 1:
-            binomDist()
+            binomial_dist()
         elif option == 0:
             break
 
