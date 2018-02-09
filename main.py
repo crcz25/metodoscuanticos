@@ -31,15 +31,53 @@ def binomial_dist():
 
 
 def uniform_discrete_dist():
-    inf = int(input(("Introduce el rango inferior: ")))
-    sup = int(input(("Introduce el rango superior: "))) + 1
-    k = np.arange(inf, sup)
-    # data = [][]
+    print("\t\t\nDistribucion uniforme discreta")
+    size = int(input("Num. de X's: "))
+    x = [0] * size
 
-    # for i in range():
-    #     for j in range():
-    #         end
-    # end
+    for i in range(size):
+        x[i] = float(input("X: "))
+
+    valor_esperado = 0
+    varianza = 0
+
+    print("\n   Probabilidades")
+    for i in range(size):
+        valor_esperado += x[i] / size
+        px = x[i]/size
+        print("P(%d) = %f" % (x[i], px))
+
+    for i in range(size):
+        varianza += math.pow((x[i] - valor_esperado), 2) / size
+
+    desviacion = math.sqrt(varianza)
+    print("\nValor esperado (u): %f ; Varianza: %f ; Desviacion: %f \n" % (valor_esperado, varianza, desviacion))
+
+    return 0
+
+
+def gral_dist():
+    print("\t\t\nFormulas Generales")
+    size = int(input("Num. de X's: "))
+    x = [0] * size
+    px = [0] * size
+    for i in range(size):
+        x[i] = float(input("Introduce X: "))
+        px[i] = float(input("Introduce P(x): "))
+
+    valor_esperado = 0
+    varianza = 0
+
+    print("\n   Probabilidades")
+    for i in range(size):
+        valor_esperado += x[i] * px[i]
+        print("P(%d) = %f" % (x[i], px[i]))
+
+    for i in range(size):
+        varianza += math.pow((x[i] - valor_esperado), 2) * px[i]
+
+    desviacion = math.sqrt(varianza)
+    print("\nValor esperado (u): %f ; Varianza: %f ; Desviacion: %f \n" % (valor_esperado, varianza, desviacion))
 
     return 0
 
@@ -116,12 +154,13 @@ def exp_dis():
     return 0
 
 
-
 def menu():
     print("1.Binomial")
     print("2.Poisson")
     print("3.Proceso de poisson")
-    print("4.Proceso de poisson")
+    print("4.Exponencial")
+    print("5.Uniforme Discreta")
+    print("6.Formulas Generales")
 
     return 0
 
@@ -142,6 +181,8 @@ if __name__ == '__main__':
             print("NOTA = 1-e^-(lambd)(x)")
         if option == 5:
             uniform_discrete_dist()
+        if option == 6:
+            gral_dist()
         if option == 0:
             break
 
