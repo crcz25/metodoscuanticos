@@ -1,11 +1,17 @@
 import sys
 import numpy as np
 import scipy.stats as stats
+import math
+
 
 def binomDist():
     print("\t\t\nBinomial")
     n = int(input("Introduce n: "))
     p = float(input("Introduce p: "))
+    q = 1 - p
+    media = n * p
+    varianza = n * p * q
+    desviacion = math.sqrt(n * p * q)
     inf = int(input(("Introduce el rango inferior: ")))
     sup = int(input(("Introduce el rango superior: "))) + 1
     k = np.arange(inf,sup)
@@ -19,7 +25,9 @@ def binomDist():
         print("P(%d) = %f" % (j, binomial[i]), end='    ')
         print("F(%d) = %f" % (j, cumulative))
         j += 1
-    print("\n")
+    print("\nMedia: %f ; Varianza: %f ; Desviacion: %f \n" % (media, varianza, desviacion))
+
+
     return 0
 
 
