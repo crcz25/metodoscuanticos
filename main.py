@@ -6,7 +6,7 @@ import math
 
 def binomial_dist():
     print("\t\t\nBinomial")
-    n = int(input("Introduce n: "))
+    n = float(input("Introduce n: "))
     p = float(input("Introduce p: "))
     q = 1 - p
     media = n * p
@@ -34,10 +34,12 @@ def uniform_discrete_dist():
     inf = int(input(("Introduce el rango inferior: ")))
     sup = int(input(("Introduce el rango superior: "))) + 1
     k = np.arange(inf, sup)
-    data = [][]
+    # data = [][]
 
-    for i in range():
-        for j in range():
+    # for i in range():
+    #     for j in range():
+    #         end
+    # end
 
     return 0
 
@@ -45,7 +47,7 @@ def uniform_discrete_dist():
 def poisson_process_dist():
     print("\t\t\nPoisson")
     alpha = float(input("Introduce alpha: "))
-    time = int(input("Introduce area/tiempo: "))
+    time = float(input("Introduce area/tiempo: "))
     lambd = alpha * time
     inf = int(input(("Introduce el rango inferior: ")))
     sup = int(input(("Introduce el rango superior: "))) + 1
@@ -88,9 +90,31 @@ def poisson_dist():
     return 0
 
 
+def exp_dis():
+    print("\t\t\nExponencial")
+    lambd= float(input("Introduce lambd: "))
+    inf = int(input(("Introduce el rango inferior: ")))
+    sup = int(input(("Introduce el rango superior: "))) + 1
+    k = np.arange(inf, sup)
+    exp = 1 - np.exp(-lambd * k)
+
+    print("\n   Probabilidades       Acumuladas")
+    # cumulative = 0
+    j = inf
+    for i in range(len(exp)):
+        # cumulative += exp[i]
+        print("P(%d) = %f" % (j, exp[i]))
+        # print("P(%d) = %f" % (j, exp[i]), end='     ')
+        # print("F(%d) = %f" % (j, cumulative))
+        j += 1
+
+    return 0
+
+
+
 def menu():
     print("1.Binomial")
-    print("2.poisson")
+    print("2.Poisson")
     print("3.Proceso de poisson")
 
 
@@ -105,7 +129,9 @@ if __name__ == '__main__':
         if option == 3:
             poisson_process_dist()
             print("NOTA = Cuando x>=n es 1-f(a)")
-        elif option == 0:
+        if option == 4:
+            exp_dis()
+        if option == 0:
             break
 
         # print("\t\tBinomial")
