@@ -89,6 +89,9 @@ def poisson_process_dist():
     alpha = float(input("Introduce alpha: "))
     time = float(input("Introduce area/tiempo: "))
     lambd = alpha * time
+    media = lambd
+    varianza = lambd
+    desviacion = math.sqrt(lambd)
     inf = int(input(("Introduce el rango inferior: ")))
     sup = int(input(("Introduce el rango superior: "))) + 1
     k = np.arange(inf,sup)
@@ -102,6 +105,7 @@ def poisson_process_dist():
         print("P(%d) = %f" % (j, poisson[i]), end='     ')
         print("F(%d) = %f" % (j, cumulative))
         j += 1
+    print("\nMedia: %f ; Varianza: %f ; Desviacion: %f \n" % (media, varianza, desviacion))
 
     return 0
 
