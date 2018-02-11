@@ -68,11 +68,13 @@ def gral_dist():
     valor_esperado = 0
     varianza = 0
 
-    print("\n   Probabilidades")
+    print("\n   Probabilidades       Acumuladas")
+    cumulative = 0
     for i in range(size):
         valor_esperado += x[i] * px[i]
-        print("P(%d) = %f" % (x[i], px[i]))
-
+        cumulative += px[i]
+        print("P(%d) = %f" % (x[i], px[i]), end='    ')
+        print("F(%d) = %f" % (x[i], cumulative))
     for i in range(size):
         varianza += math.pow((x[i] - valor_esperado), 2) * px[i]
 
