@@ -1,6 +1,7 @@
+
 import sys
 import numpy as np
-import scipy.stats as stats
+import scipy.stats as stat
 import math
 
 
