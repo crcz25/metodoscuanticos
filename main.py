@@ -1,7 +1,5 @@
-
-import sys
 import numpy as np
-import scipy.stats as stat
+import scipy.stats as stats
 import math
 
 
@@ -13,9 +11,9 @@ def binomial_dist():
     media = n * p
     varianza = n * p * q
     desviacion = math.sqrt(n * p * q)
-    inf = int(input(("Introduce el rango inferior: ")))
-    sup = int(input(("Introduce el rango superior: "))) + 1
-    k = np.arange(inf,sup)
+    inf = int(input("Introduce el rango inferior: "))
+    sup = int(input("Introduce el rango superior: ")) + 1
+    k = np.arange(inf, sup)
     binomial = stats.binom.pmf(k, n, p)
 
     print("\n   Probabilidades       Acumuladas")
@@ -93,9 +91,9 @@ def poisson_process_dist():
     media = lambd
     varianza = lambd
     desviacion = math.sqrt(lambd)
-    inf = int(input(("Introduce el rango inferior: ")))
-    sup = int(input(("Introduce el rango superior: "))) + 1
-    k = np.arange(inf,sup)
+    inf = int(input("Introduce el rango inferior: "))
+    sup = int(input("Introduce el rango superior: ")) + 1
+    k = np.arange(inf, sup)
     poisson = stats.poisson.pmf(k, lambd)
 
     print("\n   Probabilidades       Acumuladas")
@@ -117,9 +115,9 @@ def poisson_dist():
     media = lambd
     varianza = lambd
     desviacion = math.sqrt(lambd)
-    inf = int(input(("Introduce el rango inferior: ")))
-    sup = int(input(("Introduce el rango superior: "))) + 1
-    k = np.arange(inf,sup)
+    inf = int(input("Introduce el rango inferior: "))
+    sup = int(input("Introduce el rango superior: ")) + 1
+    k = np.arange(inf, sup)
     poisson = stats.poisson.pmf(k, lambd)
 
     print("\n   Probabilidades       Acumuladas")
@@ -137,9 +135,9 @@ def poisson_dist():
 
 def exp_dis():
     print("\t\t\nExponencial")
-    lambd= float(input("Introduce lambd: "))
-    inf = int(input(("Introduce el rango inferior: ")))
-    sup = int(input(("Introduce el rango superior: "))) + 1
+    lambd = float(input("Introduce lambd: "))
+    inf = int(input("Introduce el rango inferior: "))
+    sup = int(input("Introduce el rango superior: ")) + 1
     k = np.arange(inf, sup)
     exp = 1 - np.exp(-lambd * k)
 
@@ -156,16 +154,13 @@ def exp_dis():
         # print("P(%d) = %f" % (j, exp[i]), end='     ')
         # print("F(%d) = %f" % (j, cumulative))
         j += 1
-    if(inf != (sup-1)):
+    if inf != (sup-1):
         print("\n")
         print("P(%d, %d) = %f" % (inf, (sup-1), (exp[-1]-exp[0])))
     else:
         print("\n")
         print("P(X <= %d) = %f" % (inf, (exp[0])))
         print("P(X > %d) = %f" % (inf, (1-exp[0])))
-
-
-
 
     print("\nMedia: %f ; Varianza: %f ; Desviacion: %f \n" % (media, varianza, desviacion))
 
@@ -193,7 +188,7 @@ if __name__ == '__main__':
             poisson_dist()
         if option == 3:
             poisson_process_dist()
-            print("NOTA = Cuando x>=n es 1-f(a)")
+            print("NOTA = Cuando x>=n es 1-p(x<a)")
         if option == 4:
             exp_dis()
             print("NOTA = 1-e^-(lambd)(x)")
