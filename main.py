@@ -155,8 +155,15 @@ def exp_dis():
         # print("P(%d) = %f" % (j, exp[i]), end='     ')
         # print("F(%d) = %f" % (j, cumulative))
         j += 1
-    if(inf != sup):
+    if(inf != (sup-1)):
+        print("\n")
         print("P(%d, %d) = %f" % (inf, (sup-1), (exp[-1]-exp[0])))
+    else:
+        print("\n")
+        print("P(X <= %d) = %f" % (inf, (exp[0])))
+        print("P(X > %d) = %f" % (inf, (1-exp[0])))
+
+
 
 
     print("\nMedia: %f ; Varianza: %f ; Desviacion: %f \n" % (media, varianza, desviacion))
