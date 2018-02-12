@@ -155,6 +155,10 @@ def exp_dis():
         # print("P(%d) = %f" % (j, exp[i]), end='     ')
         # print("F(%d) = %f" % (j, cumulative))
         j += 1
+    if(inf != sup):
+        print("P(%d, %d) = %f" % (inf, (sup-1), (exp[-1]-exp[0])))
+
+
     print("\nMedia: %f ; Varianza: %f ; Desviacion: %f \n" % (media, varianza, desviacion))
 
     return 0
@@ -191,6 +195,3 @@ if __name__ == '__main__':
             gral_dist()
         if option == 0:
             break
-
-
-
