@@ -1,6 +1,15 @@
+"""
+Programa creado por: Molinex para la materia Metodos Cuantitativos
+    Integrantes:
+        Carlos Roberto Cueto Zumaya
+        Diego Alfredo Ballesteros Bautista
+        Jorge Armando Guzman Flores
+"""
 import numpy as np
 import scipy.stats as stats
 import math
+
+# Distribucion binomial
 
 
 def binomial_dist():
@@ -28,6 +37,8 @@ def binomial_dist():
 
     return 0
 
+# Distribucion uniforme discreta
+
 
 def uniform_discrete_dist():
     print("\t\t\nDistribucion uniforme discreta")
@@ -53,6 +64,8 @@ def uniform_discrete_dist():
     print("\nValor esperado (u): %f ; Varianza: %f ; Desviacion: %f \n" % (valor_esperado, varianza, desviacion))
 
     return 0
+
+# Formulas generales
 
 
 def gral_dist():
@@ -82,6 +95,8 @@ def gral_dist():
 
     return 0
 
+# Processo de distribucion de posion, alfa y area-tiempo
+
 
 def poisson_process_dist():
     print("\t\t\nPoisson")
@@ -108,6 +123,8 @@ def poisson_process_dist():
 
     return 0
 
+# Distribucion de posion
+
 
 def poisson_dist():
     print("\t\t\nPoisson")
@@ -131,6 +148,8 @@ def poisson_dist():
     print("\nMedia: %f ; Varianza: %f ; Desviacion: %f \n" % (media, varianza, desviacion))
 
     return 0
+
+# Distribucion exponencial
 
 
 def exp_dis():
@@ -179,6 +198,8 @@ def menu():
 
 
 if __name__ == '__main__':
+    print("MOLINEX - Carlos Cueto, Diego Ballesteros, Jorge Guzman")
+    print("Programa para calcular distribuciones vistas en primer parcial de Metodos Cuantitativos\n")
     while True:
         menu()
         option = int(input("Opcion: "))

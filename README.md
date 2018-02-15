@@ -11,7 +11,7 @@ Espacio muestral (E): El conjunto de todos los posibles eventos.
 0 <= P(Ai) <= 1
 ∑ P(Ai) = i
 ```
-## Permutaciones y Combinaciones 
+## Permutaciones y Combinaciones
 ```
 Permutaciones:
 Número de formas para seleccionar r de n elementos cuando el orden es importante
@@ -78,7 +78,7 @@ Nula la probabilidad asociada a un punto
 𝑓(𝑥) ≥ 0 𝑐𝑜𝑛 𝑡𝑜𝑑𝑎𝑠 𝑙𝑎𝑠 𝑥
  −∞∫∞  𝑓( 𝑥) 𝑑𝑥 = á𝑟𝑒𝑎 𝑏𝑎𝑗𝑜 𝑡𝑜𝑑𝑎 𝑙𝑎 𝑔𝑟á𝑓𝑖𝑐𝑎 𝑑𝑒 𝑓 𝑥 = 1
 ```
-## Distribución uniforme discreta 
+## Distribución uniforme discreta
 ```
 Describe el comportamiento de una variable discreta que puede tomar n valores distintos con la misma
 probabilidad cada uno de ellos.
@@ -94,19 +94,19 @@ q es la probabilidad de fracaso.
 ```
 Esta distribución se aplica de forma natural al realizar repeticiones independientes de un
 experimento que tenga respuestas binarias, generalmente clasificadas como “éxito” y “fracaso”
-``` 
+```
 
 ## Distribucion Poisson
-``` 
+```
 𝑝(𝑥; 𝜆) es la probabilidad de que ocurra x éxitos por unidad de tiempo o espacio con
 una media 𝜆
 Se dice que una variable aleatoria discreta X tiene una distribución de Poisson
-con parámetro 𝜆 = 𝑛𝑝 (λ > 0) 
+con parámetro 𝜆 = 𝑛𝑝 (λ > 0)
 Cada evento es al azar ya sea en unidad de tiempo o unidad de área.
 Cada intervalo de tiempo o espacio es independiente de otro intervalo dado.
-``` 
+```
 
-## Distribucion Normal 
+## Distribucion Normal
 ```
 Es simétrica respecto a la media µ.
 Tiene un máximo en la media µ
@@ -122,7 +122,7 @@ p(μ - 3σ < X ≤ μ + 3σ) = 0.997 = 99.7 %
 ```
 ## Distribucion Normal Estandar
 ```
-tiene por media, μ = 0, y desviación típica, σ =1. 
+tiene por media, μ = 0, y desviación típica, σ =1.
 ```
 
 ## Distribucion Normal NO Estandar
@@ -130,3 +130,20 @@ tiene por media, μ = 0, y desviación típica, σ =1.
 tiene una distribución normal con media μ y desviación estándar σ
 ```
 ![Alt text](./resources/Screenshot%20from%202018-02-11%2020-43-05.png)
+
+## Ex1
+```
+Propiedad de la probabilidad -> 0<= P(Ai) <= 1
+Probabilidad de que sucedan el evento A y el evento B si tales eventos son independientes -> P(A y B) = p(a) * p(b)
+Expresion que indica una probabilidad acumulativa -> p(X<=x)
+Ejemplos de variables aleatorias continuas -> Profundidad de un rio, estatura, altura de un puente
+Distribucion que usa variables aleatorias discretas y cuya funcion de densidad para cualquier k es P[X=k]=1/n -> Uniforme discreta
+Es la frcuencia deun conjunto de resultados de un evento A sobre un conjunto total de pruebas -> probabilidad
+Probabilidad de que sucedan un evento B dado que el evento A ha sucedido -> P(B/A)=P(AUB)/P(A)
+Tipos generales en que se divide la distribucion de probabilidad de acuerdo al tipo de variable -> discreta y continua
+Si el evento A y el Evento B son independientes entonces la probabilidad de que suceda uno de los dos eventos es -> P(AoB)=P(A)+P(B)
+Utiliza una probabilidad de exito y otra de fracaso -> Binomial
+Regla de la suma de la probabilidad de dos eventos -> P(AoB)=P(A)+P(B)-P(A y B)
+Determina las probabilidades asociadas con los valores de una variable aleatoria X sobre un conjunto de resultados de un espacio muestral -> Distribucion de probabilidad
+Son ejemplos de distribucion de probabilidades discretas -> Binomial y Poisson
+```
