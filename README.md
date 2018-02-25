@@ -147,3 +147,9 @@ Regla de la suma de la probabilidad de dos eventos -> P(AoB)=P(A)+P(B)-P(A y B)
 Determina las probabilidades asociadas con los valores de una variable aleatoria X sobre un conjunto de resultados de un espacio muestral -> Distribucion de probabilidad
 Son ejemplos de distribucion de probabilidades discretas -> Binomial y Poisson
 ```
+```
+def f(s,p=-1,n=0,m=[]):
+ x=len(str(s))*2
+ while n not in m:m+=[s];y=str(s*s).zfill(x);n=int(y[x/4:x*3/4]);p+=1;s=n
+ return p
+ ```
