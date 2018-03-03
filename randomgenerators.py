@@ -1,6 +1,4 @@
 import numpy
-import random
-import os
 
 
 def menu():
@@ -77,23 +75,13 @@ def f(x):
     return 2 * x
 
 
-def f1(x):
-    return -1 / 6 + x / 12
-
-
-def f2(x):
-    return 4 / 3 - x / 6
-
-
 def acep_rech():
     a = int(input("a: "))
     b = int(input("b: "))
-    # n = int(input("Iteraciones: "))
     n = int(input("Num. de aceptados: "))
 
     mx = numpy.linspace(a, b, 50)
-    mfx = f2(mx)
-    m = 0
+    mfx = f(mx)
     M = mfx.max()
 
     print("\n[a,b]: [%d,%d] ; M: %f\n" % (a, b, M))
@@ -101,9 +89,7 @@ def acep_rech():
     naceptados = 0
     nrechazos = 0
     aceptados = []
-    media = 0
-    desviacion_estandar = 0
-    varianza = 0
+    itr = 0
 
     while naceptados < n:
         # random.uniform -> return a + (b-a) * self.random()
@@ -111,7 +97,7 @@ def acep_rech():
         r2 = numpy.random.uniform(0, 1)
 
         x_asterisk = a + (b - a) * r1
-        fx_asterisk = f2(x_asterisk)
+        fx_asterisk = f(x_asterisk)
 
         print("r1 = %f ; r2 = %f ; x* = %f ; f(x*) = %f" % (r1, r2, x_asterisk, fx_asterisk))
         print("r2 = %f <= f(x*)/M = %f" % (r2, fx_asterisk / M))
@@ -123,7 +109,11 @@ def acep_rech():
             nrechazos += 1
         print("Aceptados: %d" % naceptados, end=' ')
         print("Rechazos: %d\n" % nrechazos)
+        itr += 1
 
+    max_aceptado = max(aceptados)
+    min_aceptado = min(aceptados)
+    print("Max. Aceptado: %f ; Min. Aceptado: %f; Itr: %d" % (max_aceptado, min_aceptado, itr))
     total = naceptados + nrechazos
     media = numpy.mean(aceptados)
     print("Media: %f" % media)
@@ -133,30 +123,6 @@ def acep_rech():
     print("Desviacion Estandar: %f" % desviacion_estandar)
     print("Porcentaje de aceptados: %f %c" % (naceptados / total * 100, 37))
     print("\n")
-
-    # for i in range(n):
-    #     # random.uniform -> return a + (b - a) * self.random()
-    #     # random.random -> return random [0.0,1.0)
-    #     r1 = random.uniform(a, b)
-    #     r2 = random.random()
-    #     # r2 = int.from_bytes(os.urandom(8), byteorder="big") / ((1 << 64) - 1)
-    #
-    #     x_asterisk = r1
-    #     fx_asterisk = f(x_asterisk)
-    #
-    #     print("r1= %f ; r2= %f ; x*= %f ; f(x*)= %f" % (r1, r2, x_asterisk, fx_asterisk))
-    #     print("%f <= %f" % (r2, fx_asterisk / M))
-    #
-    #     if r2 <= fx_asterisk / M:
-    #         naceptados += 1
-    #     else:
-    #         nrechazos += 1
-    #
-    #     print("Aceptados: %d" % naceptados, end=' ')
-    #     print("Rechazos: %d" % nrechazos)
-    #
-    # print("\n")
-    # return 0
 
 
 if __name__ == '__main__':
