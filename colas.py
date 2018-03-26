@@ -1,3 +1,7 @@
+"""
+Carlos Roberto Cueto Zumaya     A01209474
+"""
+
 import math
 
 
@@ -77,7 +81,6 @@ def mms():
     ws = wq + 1 / miu
     ls = lamb * ws
 
-
     n = int(input("P(n): "))
 
     cs = int(input("Cs: "))
@@ -87,7 +90,7 @@ def mms():
     cw = cw * ls
     ct = cs + cw
 
-    if (n > s):
+    if n > s:
         pn = (pow(helper, n) * p0) / (math.factorial(s) * pow(s, n - s))
     else:
         pn = pow(helper, n) * p0 / math.factorial(n)
