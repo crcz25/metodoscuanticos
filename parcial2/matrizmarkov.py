@@ -5,7 +5,7 @@ n = int(input("Potencia: "))
 
 
 # agregar mult de v0
-matrix = np.loadtxt('matriz.txt', usecols=range(cols))
+matrix = np.loadtxt('p.txt', usecols=range(cols))
 m = np.linalg.matrix_power(matrix, n)
 
 
