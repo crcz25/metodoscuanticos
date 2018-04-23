@@ -6,7 +6,7 @@ import math
 
 
 def menu():
-    print("1.Reglas Generales ")
+    print("1.Reglas Generales Ley de little")
     print("2.M/M/1 (Tiempos de llegada exponenciales/Tiempo de servicio exponencial/ 1 servidor)")
     print("3.M/M/S (Tiempos de llegada exponenciales/Tiempo de servicio exponencial/ n servidor)")
     return 0
@@ -31,8 +31,6 @@ def mm1():
     lamb = float(input("\nTasa media de llegadas λ: "))
     miu = float(input("Tasa media de servicio μ: "))
     # wq = float(input("Tiempo esperado Wq: "))
-    n = int(input("Probabilidad n: "))
-    t = float(input("Probabilidad t: "))
 
     ls = lamb / (miu - lamb)
     lq = pow(lamb, 2) / (miu * (miu - lamb))
@@ -41,6 +39,9 @@ def mm1():
     p = lamb / miu
 
     print("\nλ=%f ; μ=%f ; Ls=%f ; Lq=%f ; Ws=%f ; Wq=%f ; p=%f\n" % (lamb, miu, ls, lq, ws, wq, p))
+
+    n = int(input("Probabilidad n: "))
+    t = float(input("Probabilidad t: "))
 
     aux = 0
     for i in range(n+1):
@@ -51,13 +52,13 @@ def mm1():
         pls = pow(p, i + 1)
 
         # print("P(%d)=%f ; Fp(%d)=%f" % (i, pn, i, aux))
-        print("n: %d ; p=%f ; Pn=%f ; PLs=%f" % (i, p, pn, pls))
+        print("n: %d; Pn=%f ; PLs=%f" % (i, pn, pls))
 
     # P(Ws>t)=e^-μ(1-p)t
     pws = math.exp(-miu * (1 - p) * t)
     # P(Wq>t)=pe^-μ(1-p)t
     pwq = p * math.exp(-miu * (1 - p) * t)
-    print("\nPWs=%f ; PWq=%f" % (pws, pwq))
+    print("\nPWs=%f ; PWq=%f\n" % (pws, pwq))
 
     return 0
 
@@ -81,24 +82,27 @@ def mms():
     ws = wq + 1 / miu
     ls = lamb * ws
 
-    n = int(input("P(n): "))
+    print("\nλ=%f ; μ=%f ; s=%d ; p=%f" % (lamb, miu, s, p))
+    print("p0=%f ; Ls=%f ; Lq=%f ; Ws=%f ; Wq=%f\n" % (p0, ls, lq, ws, wq))
 
-    cs = int(input("Cs: "))
-    cw = int(input("Cw: "))
+    cs = int(input("Coste por unidad de tiempo y servidor Cs: "))
+    cw = int(input("Coste de espera por unidad de tiempo y cliente Cw: "))
 
     cs = cs * s
     cw = cw * ls
     ct = cs + cw
 
-    if n > s:
-        pn = (pow(helper, n) * p0) / (math.factorial(s) * pow(s, n - s))
-    else:
-        pn = pow(helper, n) * p0 / math.factorial(n)
+    print("\nCs=%f ; Cw=%f ; Ct=%f\n" % (cs, cw, ct))
 
-    print("\nλ=%f ; μ=%f ; s=%d ; p=%f" % (lamb, miu, s, p))
-    print("p0=%f ; Ls=%f ; Lq=%f ; Ws=%f ; Wq=%f\n" % (p0, ls, lq, ws, wq))
-    print("p(%d)=%f\n" % (n, pn))
-    print("Cs=%f ; Cw=%f ; Ct=%f\n" % (cs, cw, ct))
+    i = int(input("P(n): "))
+
+    pn = 0
+    for n in range(i + 1):
+        if n > s:
+            pn = (pow(helper, n) * p0) / (math.factorial(s) * pow(s, n - s))
+        elif 0 <= n <= s:
+            pn = pow(helper, n) * p0 / math.factorial(n)
+        print("p(%d)=%f\n" % (n, pn))
 
     return 0
 
