@@ -1,56 +1,49 @@
+from gauss import GEPP
 import numpy as np
 
-def GEPP(A, b):
-    '''
-    Gaussian elimination with partial pivoting.
-    % input: A is an n x n nonsingular matrix
-    %        b is an n x 1 vector
-    % output: x is the solution of Ax=b.
-    % post-condition: A and b have been modified.
-    '''
-    n = len(A)
-    if b.size != n:
-        raise ValueError("Invalid argument: incompatible sizes between A & b.", b.size, n)
-    # k represents the current pivot row. Since GE traverses the matrix in the upper
-    # right triangle, we also use k for indicating the k-th diagonal column index.
-    for k in range(n-1):
-        #Choose largest pivot element below (and including) k
-        maxindex = abs(A[k:,k]).argmax() + k
-        if A[maxindex, k] == 0:
-            raise ValueError("Matrix is singular.")
-        #Swap rows
-        if maxindex != k:
-            A[[k, maxindex]] = A[[maxindex, k]]
-            b[[k, maxindex]] = b[[maxindex, k]]
-        for row in range(k+1, n):
-            multiplier = A[row][k]/A[k][k]
-            #the only one in this column since the rest are zero
-            A[row][k] = multiplier
-            for col in range(k + 1, n):
-                A[row][col] = A[row][col] - multiplier*A[k][col]
-            #Equation solution column
-            b[row] = b[row] - multiplier*b[k]
-    # print(A)
-    # print(b)
-    x = np.zeros(n)
-    k = n-1
-    x[k] = b[k]/A[k, k]
-    while k >= 0:
-        x[k] = (b[k] - np.dot(A[k, k+1:], x[k+1:]))/A[k, k]
-        k = k-1
-    return x
-
-
 if __name__ == "__main__":
-    A = np.array([
-        [4, 2, -2],
-        [2, 8, 4],
-        [30, 12, -4]], dtype='f')
-    b = np.array([
-        [10],
-        [32],
-        [24]], dtype='float')
-    # print(GENP(np.copy(A), np.copy(b)))
-    res = GEPP(A, b)
+    # Load files
+    P = []
+    R = []
+    with open("p.txt", "r") as f:
+        for line in f:
+            P.append(np.matrix(line))
 
-    print(res)
+    with open("r.txt", "r") as f:
+        for line in f:
+            R.append(np.matrix(line))
+
+
+    # Calcular C(S,i)
+    C = []
+    for i in range(len(P)):
+        auxC = 0
+        for j in range(len(P[0])):
+            auxP = P[i]
+            auxR = R[i]
+            # print(auxP[j])
+            # print(auxR[j])
+            # auxC = float(np.dot((auxP - auxR)**2, w.T))
+            # for k in range(auxP[j].shape[j]):
+            #     print(k)
+            # for k in range(len(auxP[j])):
+            #     auxC += auxP[k] * auxR[k]
+            #     print(auxC)
+        # C.append(auxC)
+
+    # print(C)
+    # print(P[0])
+    # print(R[0])
+
+    # A = np.array([
+    #     [4, 2, -2],
+    #     [2, 8, 4],
+    #     [30, 12, -4]], dtype='f')
+    # b = np.array([
+    #     [10],
+    #     [32],
+    #     [24]], dtype='float')
+    # # print(GENP(np.copy(A), np.copy(b)))
+    # res = GEPP(A, b)
+    #
+    # print(res)
