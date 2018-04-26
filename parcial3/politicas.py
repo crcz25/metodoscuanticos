@@ -1,10 +1,22 @@
 from gauss import GEPP
 import numpy as np
 
+
+def to_str(n, base):
+    convert_string = "0123456789ABCDEF"
+    if n < base:
+        return convert_string[n]
+    else:
+        return to_str(n//base, base) + convert_string[n % base]
+
+
 if __name__ == "__main__":
+    print("Leyendo matrices")
     # Load files
     P = []
     R = []
+    maxS = []
+    pol = []
     with open("p.txt", "r") as f:
         for line in f:
             P.append(np.matrix(line))
@@ -13,37 +25,112 @@ if __name__ == "__main__":
         for line in f:
             R.append(np.matrix(line))
 
+    # alpha = float(input("Inserte el valor de alpha: "))
+    # S = int(input("Inserte el valor de alpha: "))
+    # estados = int(input("Numeros de estados: "))
+    # acciones = int(input("Numeros de acciones: "))
 
-    # Calcular C(S,i)
-    C = []
-    for i in range(len(P)):
-        auxC = 0
-        for j in range(len(P[0])):
-            auxP = P[i]
-            auxR = R[i]
-            # print(auxP[j])
-            # print(auxR[j])
-            # auxC = float(np.dot((auxP - auxR)**2, w.T))
-            # for k in range(auxP[j].shape[j]):
-            #     print(k)
-            # for k in range(len(auxP[j])):
-            #     auxC += auxP[k] * auxR[k]
-            #     print(auxC)
-        # C.append(auxC)
+    alpha = 0.6
+    estados = 3
+    acciones = len(P)
+    totalPoliticas = pow(acciones, estados)
+    print("alpha:", alpha, "acciones:", acciones, "estados:", estados, "Total de Politicas:", totalPoliticas)
 
-    # print(C)
-    # print(P[0])
-    # print(R[0])
+    CS = []
+    for i in range(acciones):
+        for j in range(estados):
+            auxP = np.squeeze(np.array(P[i][j]))
+            auxR = np.squeeze(np.array(R[i][j]))
+            auxCS = 0
+            for k in range(estados):
+                auxCS += auxP[k] * auxR[k]
+            # print(auxCS)
+            CS.append(auxCS)
+    CS = np.reshape(CS, (acciones, estados))
+    print("\nCS")
+    print(CS)
+    print()
 
-    # A = np.array([
-    #     [4, 2, -2],
-    #     [2, 8, 4],
-    #     [30, 12, -4]], dtype='f')
-    # b = np.array([
-    #     [10],
-    #     [32],
-    #     [24]], dtype='float')
-    # # print(GENP(np.copy(A), np.copy(b)))
-    # res = GEPP(A, b)
-    #
-    # print(res)
+    S = []
+    for t in range(totalPoliticas):
+        pos = to_str(t, acciones)
+        pos = ((estados - len(pos)) * "0") + pos
+        print(pos)
+        pol.append(pos)
+        aux = 0
+        C = []
+        newP = []
+        newR = []
+        for s in range(estados):
+            indexC = int(pos[s])
+            auxP = np.squeeze(np.array(P[indexC][s]))
+            auxR = np.squeeze(np.array(R[indexC][s]))
+            auxC = 0
+            # print(auxP)
+            # print(auxR)
+
+            # Calcular C'S
+            for j in range(estados):
+                auxC += auxP[j] * auxR[j]
+            C.append(round(auxC, 4))
+            newP.append(auxP)
+            newR.append(auxR)
+        # print(C)
+
+        # Encontrar matrices para evaluar politica
+        newP = np.reshape(newP, (estados, estados))
+        newR = np.reshape(newR, (estados, estados))
+
+        gauss = newP.copy()
+
+        for i in range(estados):
+            auxVs = 0
+            for j in range(estados):
+                if i == j:
+                    aux = 1 - (alpha * gauss[i][j])
+                else:
+                    aux = -alpha * gauss[i][j]
+                gauss[i][j] = aux
+            # print(aux)
+
+        # print(gauss)
+        V = GEPP(np.copy(gauss), np.copy(C))
+        # print(VS)
+        Vk = []
+        for k in range(acciones):
+            # print(CS[k])
+            for i in range(estados):
+                auxVs = 0
+                auxP = np.squeeze(np.array(P[k]))
+                # print(auxP)
+                for j in range(estados):
+                    auxVs += alpha * auxP[i][j] * V[j]
+                    # print(alpha, "(", auxP[i][j], "*", V[j], ")")
+                auxVs += CS[k][i]
+                # print(auxVs)
+                Vk.append(auxVs)
+
+        Vk = np.reshape(Vk, (acciones, estados))
+        print("Matriz P")
+        print(newP)
+        print("Matriz R")
+        print(newR)
+        print("V")
+        print(V.round(decimals=4))
+        print("C")
+        print(C)
+        print("Vk mejorado")
+        print(Vk.round(decimals=4))
+        print()
+
+        # if Vk.max() > max(maxS):
+        #     maxS.pop()
+        #     maxS.append(Vk.max())
+        #     print(t)
+        #     print(maxS)
+        # pos = np.argmax(np.max(Vk, axis=0))
+        maxS.append(Vk.max())
+    print()
+    print("Soluciones")
+    print(maxS)
+    print(pol)
