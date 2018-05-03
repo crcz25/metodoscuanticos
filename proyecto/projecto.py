@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 lamda = float(input("Escribe el valor de Lambda: "))
 mu = float(input("Escribe el valor de mu: "))
 s = int(input("Escribe el valor de s (número de servidores): "))
+n = int(input("Num de clientes a simular: "))
 
 N = ciw.create_network(
     Arrival_distributions=[['Exponential', lamda]],
@@ -16,7 +17,7 @@ N = ciw.create_network(
 ciw.seed(1)
 Q = ciw.Simulation(N)
 
-Q.simulate_until_max_customers(140, progress_bar=True)
+Q.simulate_until_max_customers(n, progress_bar=True)
 
 recs = Q.get_all_records()
 recs.sort()
@@ -79,15 +80,42 @@ plt.show()
 
 print(t)
 
-print("Estadisticas")
+print("Estadisticas Teorico")
 print("λ=%f  μ=%f  s=%d" % (lamda, mu, s))
 print("p=%f  p0=%f  Ls=%f  Lq=%f  Ws=%f  Wq=%f\n" % (p, p0, ls, lq, ws, wq))
 
-print("Simulacion")
+
+print("Estadisticas Simulacion")
+sim = PrettyTable([
+    'id',
+    'lqR',
+    'lsR',
+    'wsR',
+    'wqR'
+])
+i = 0
+for a in qArrival:
+    lqR = a
+    wqR = lqR / lamda
+    wsR = wqR + 1 / mu
+    lsR = lamda * wsR
+    i += 1
+
+    sim.add_row([
+        i,
+        format(lqR, '.4f'),
+        format(lsR, '.4f'),
+        format(wsR, '.4f'),
+        format(wqR, '.4f'),
+    ])
+    # print("id:", i, "\tlqR:", round(lqR, 3), "\tlsR:", round(lsR, 3), "\t\twsR:", round(wsR, 3), "\t\twqR:", round(wqR, 3))
+
+print(sim)
 servicetimes = [r.service_time for r in recs]
 wait = [r.waiting_time for r in recs]
 mean_service_time = sum(servicetimes) / len(servicetimes)
 mean_waiting_time = sum(wait) / len(wait)
 mean_queue = sum(qDeparture) / len(qDeparture)
 print("Media de tiempo de servicio: %f ; Media de tiempo de espera: %f" % (mean_service_time, mean_waiting_time))
+print()
 print("Media de fila: %f" % mean_queue)

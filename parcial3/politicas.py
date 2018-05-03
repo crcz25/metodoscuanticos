@@ -121,7 +121,35 @@ if __name__ == "__main__":
         print(C)
         print("Vk mejorado")
         print(Vk.round(decimals=4))
+
+        solOp = []
+
+        for i in range(acciones - 1):
+            solPol = []
+            solVs = []
+            for j in range(estados):
+                if Vk[i, j] > Vk[i + 1, j]:
+                    solVs.append(Vk[i, j])
+                    solPol.append(i)
+                    # print(Vk[i, j], ">", Vk[i + 1, j])
+                else:
+                    solVs.append(Vk[i + 1, j])
+                    solPol.append(i + 1)
+                    # print(Vk[i, j], ">", Vk[i + 1, j])
+            solOp.append(solVs)
+            solOp.append(solPol)
+
+            if solPol not in maxS:
+                maxS.append(solPol)
+            # else:
+            #     exit(0)
+
+        solOp = np.reshape(solOp, (acciones, estados))
+        print("Solucion Optima")
+        print(solOp)
+        print(maxS)
         print()
+
 
         # if Vk.max() > max(maxS):
         #     maxS.pop()
@@ -129,8 +157,8 @@ if __name__ == "__main__":
         #     print(t)
         #     print(maxS)
         # pos = np.argmax(np.max(Vk, axis=0))
-        maxS.append(Vk.max())
-    print()
-    print("Soluciones")
-    print(maxS)
-    print(pol)
+        # maxS.append(Vk.max())
+    # print()
+    # print("Soluciones")
+    # print(maxS)
+    # print(pol)
