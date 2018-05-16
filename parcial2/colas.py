@@ -100,7 +100,7 @@ def mms():
     for n in range(i + 1):
         if n > s:
             pn = (pow(helper, n) * p0) / (math.factorial(s) * pow(s, n - s))
-        elif 0 <= n <= s:
+        if 0 <= n <= s:
             pn = pow(helper, n) * p0 / math.factorial(n)
         print("p(%d)=%f\n" % (n, pn))
 

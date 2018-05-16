@@ -69,13 +69,21 @@ if __name__ == "__main__":
             # print(auxP)
             # print(auxR)
 
-            # Calcular C'S
-            for j in range(estados):
-                auxC += auxP[j] * auxR[j]
-            C.append(round(auxC, 4))
+            # # Calcular C'S
+            # for j in range(estados):
+            #     auxC += auxP[j] * auxR[j]
+            # C.append(round(auxC, 4))
             newP.append(auxP)
             newR.append(auxR)
         # print(C)
+
+        for i in range(estados):
+            # for j in range(estados):
+            indexC = int(pos[i])
+            auxC = CS[indexC][i]
+            # print(CS[indexC][i])
+            C.append(round(auxC, 4))
+            # print(indexC)
 
         # Encontrar matrices para evaluar politica
         newP = np.reshape(newP, (estados, estados))
@@ -123,42 +131,37 @@ if __name__ == "__main__":
         print(Vk.round(decimals=4))
 
         solOp = []
-
+        solPol = []
+        sol = ''
         for i in range(acciones - 1):
-            solPol = []
             solVs = []
             for j in range(estados):
                 if Vk[i, j] > Vk[i + 1, j]:
                     solVs.append(Vk[i, j])
                     solPol.append(i)
+                    sol += str(i)
                     # print(Vk[i, j], ">", Vk[i + 1, j])
                 else:
                     solVs.append(Vk[i + 1, j])
                     solPol.append(i + 1)
+                    sol += str(i + 1)
                     # print(Vk[i, j], ">", Vk[i + 1, j])
             solOp.append(solVs)
             solOp.append(solPol)
 
             if solPol not in maxS:
                 maxS.append(solPol)
+
             # else:
+            # print("SOL OPTIMA")
             #     exit(0)
-
         solOp = np.reshape(solOp, (acciones, estados))
-        print("Solucion Optima")
+        print("Solucion optima")
         print(solOp)
-        print(maxS)
+        # print(maxS)
         print()
+        # print(asdf)
 
-
-        # if Vk.max() > max(maxS):
-        #     maxS.pop()
-        #     maxS.append(Vk.max())
-        #     print(t)
-        #     print(maxS)
-        # pos = np.argmax(np.max(Vk, axis=0))
-        # maxS.append(Vk.max())
-    # print()
-    # print("Soluciones")
-    # print(maxS)
-    # print(pol)
+        if sol == pos:
+            print("SOLUCION OPTIMA ENCONTRADA\nS0 == Sol. Optima")
+            break
